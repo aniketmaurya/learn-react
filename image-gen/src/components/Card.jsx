@@ -47,11 +47,11 @@ export default function Card() {
   };
 
   return (
-    <div className="w-[300px] rounded-md border">
+    <div className="w-1/2 rounded-md border">
       <img
         src={imageSrc}
         alt="Generated Image"
-        className="h-[200px] w-full rounded-md object-cover"
+        className="h-full w-full rounded-md object-cover"
       />
       <div className="p-4">
         {/* <h1 className="text-lg font-semibold">About Macbook</h1> */}
