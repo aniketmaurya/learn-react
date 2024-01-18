@@ -32,18 +32,51 @@ function Input({ onGenerateClick }) {
   );
 }
 
+
 export default function Card() {
   const [imageSrc, setImageSrc] = useState(
     'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
   );
 
+  const postRequest = async (newPrompt) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/endpoint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Add any additional headers if needed
+        },
+        body: JSON.stringify({
+          // Your request payload goes here
+          prompt: newPrompt,
+          negative_prompt: 'ugly, blurry, poor quality',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Assuming the response is an image, convert it to a data URL
+      const responseDataUrl = await response.blob().then((blob) =>
+        URL.createObjectURL(blob)
+      );
+
+      setImageSrc(responseDataUrl);
+      return responseDataUrl
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle error appropriately (e.g., show an error message to the user)
+    }
+  }
+
   const handleGenerateClick = (inputText) => {
     // You can use the input text to generate a new image source
     // For now, let's just append it to the original URL
     // TODO: Integrate SDXL Turbo here and update newImageSrc to the generated image.
-    const newImageSrc = `${imageSrc}&text=${inputText}`;
-    console.log(newImageSrc);
-    setImageSrc(newImageSrc);
+    postRequest(inputText)
+    // console.log(newImageSrc);
+    // setImageSrc(newImageSrc);
   };
 
   return (
