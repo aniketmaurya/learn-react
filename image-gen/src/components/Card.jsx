@@ -5,10 +5,10 @@ function Input({ onGenerateClick }) {
 
 
   return (
-    <div className="flex w-full items-center space-x-2 md:w-full">
+    <div className="flex w-full items-center m-1 space-x-1 md:w-full">
       <input
         id="promptInput"
-        className="flex h-10 w-full rounded-md border border-gray/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex h-10 w-full rounded-md border border-gray-500 bg-transparent px-3 py-2 text-sm placeholder:text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
         type="text"  // Fixed the type from "Text" to "text"
         placeholder="Text prompt"
         value={inputText}
@@ -16,7 +16,7 @@ function Input({ onGenerateClick }) {
       ></input>
       <button
         type="button"
-        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        className="rounded-md bg-black px-2 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         onClick={() => onGenerateClick(inputText)}
       >
         Generate
@@ -63,15 +63,6 @@ export default function Card() {
     }
   }
 
-  const handleGenerateClick = (inputText) => {
-    // You can use the input text to generate a new image source
-    // For now, let's just append it to the original URL
-    // TODO: Integrate SDXL Turbo here and update newImageSrc to the generated image.
-    postRequest(inputText)
-    // console.log(newImageSrc);
-    // setImageSrc(newImageSrc);
-  };
-
   return (
     <div className="w-1/2 rounded-md border">
       <img
@@ -79,7 +70,7 @@ export default function Card() {
         alt="Generated Image"
         className="h-full w-full rounded-md object-cover"
       />
-        <Input onGenerateClick={handleGenerateClick} />
+        <Input onGenerateClick={(inputText) => postRequest(inputText)} />
     </div>
   );
 }
