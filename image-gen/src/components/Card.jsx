@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 
 function Input({ onGenerateClick }) {
-  const [inputText, setInputText] = useState('Cats in hats');
+  const [inputText, setInputText] = useState('Dog in hat, puppy eyes, frosty background, full of lights, mountain, 4K');
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
-
-  const handleGenerateClick = () => {
-    onGenerateClick(inputText);
-  };
 
   return (
     <div className="flex w-full items-center space-x-2 md:w-full">
@@ -19,12 +12,12 @@ function Input({ onGenerateClick }) {
         type="text"  // Fixed the type from "Text" to "text"
         placeholder="Text prompt"
         value={inputText}
-        onChange={handleInputChange}
+        onChange={(e)=>setInputText(e.target.value)}
       ></input>
       <button
         type="button"
         className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-        onClick={handleGenerateClick}
+        onClick={() => onGenerateClick(inputText)}
       >
         Generate
       </button>
@@ -86,10 +79,7 @@ export default function Card() {
         alt="Generated Image"
         className="h-full w-full rounded-md object-cover"
       />
-      <div className="p-4">
-        {/* <h1 className="text-lg font-semibold">About Macbook</h1> */}
         <Input onGenerateClick={handleGenerateClick} />
-      </div>
     </div>
   );
 }
