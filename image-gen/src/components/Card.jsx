@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import sampleImageSrc from '../assets/sdxl-turbo.jpeg';
 
 function Input({ onGenerateClick }) {
   const [inputText, setInputText] = useState('Dog in hat, puppy eyes, frosty background, full of lights, mountain, 4K');
@@ -8,7 +9,7 @@ function Input({ onGenerateClick }) {
     <div className="flex w-full items-center m-1 space-x-1 md:w-full">
       <input
         id="promptInput"
-        className="flex h-10 w-full rounded-md border border-gray-500 bg-transparent px-3 py-2 text-sm placeholder:text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex h-10 w-10/12 rounded-md border border-gray/40 bg-transparent px-3 py-2 text-sm placeholder:text-gray-800 focus:outline-none focus:ring-1 focus:ring-gray/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
         type="text"  // Fixed the type from "Text" to "text"
         placeholder="Text prompt"
         value={inputText}
@@ -16,7 +17,7 @@ function Input({ onGenerateClick }) {
       ></input>
       <button
         type="button"
-        className="rounded-md bg-black px-2 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        className="rounded-md w-fit bg-black px-2 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         onClick={() => onGenerateClick(inputText)}
       >
         Generate
@@ -28,7 +29,7 @@ function Input({ onGenerateClick }) {
 
 export default function Card() {
   const [imageSrc, setImageSrc] = useState(
-    'https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60'
+    sampleImageSrc
   );
 
   const postRequest = async (newPrompt) => {
@@ -64,7 +65,7 @@ export default function Card() {
   }
 
   return (
-    <div className="w-1/2 rounded-md border">
+    <div className="w-auto rounded-md border">
       <img
         src={imageSrc}
         alt="Generated Image"
